@@ -51,10 +51,10 @@ class PickleCache(object):
             returns the length of self.__data
         Examples:
             >>> pcache = PickleCache
+            >>> pcache['test'] = 'hello'
             >>> len(pcache)
             1
         """
-        
         return len(self.__data)
 
     def __getitem__(self, key):
@@ -73,7 +73,8 @@ class PickleCache(object):
             Traceback (most recent call last):
              File "<pyshell#5>", line 1, in <module>
             print pcache['exam']
-            File "/home/vagrant/Desktop/is210-week-13-synthesizing/picklecache.py", line 78, in __getitem__
+            File "/home/vagrant/Desktop/is210-week-13-synthesizing/
+            picklecache.py", line 78, in __getitem__
             raise KeyError('key not found')
             KeyError: 'key not found'
         """
@@ -82,19 +83,17 @@ class PickleCache(object):
         except KeyError:
             raise KeyError('key not found')
 
-        def __delitem__(self, key):
-            """Function deletes the entries.
+    def __delitem__(self, key):
+        """Function deletes the entries.
             Args:
                 key(mix): a dictionary key used to remove the entries.
             Return:
                 returns the dict after deleting the items accessed by key.
             Examples:
                 >>> pcache = PickleCache()
-                
-                
-                
-                 
-                
-            """
-            del self.__data[key]
-
+                >>> pcache['test'] = 'hello'
+                >>> del pcache['test']
+                >>> len(pcache)
+                0
+        """
+        del (self.__data)[key]
