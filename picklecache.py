@@ -43,6 +43,8 @@ class PickleCache(object):
             1
         """
         self.__data[key] = value
+        if self.autosync is True:
+            self.flush()
 
     def __len__(self):
         """Function takes no argument.
@@ -98,6 +100,8 @@ class PickleCache(object):
                 0
         """
         del (self.__data)[key]
+        if self.autosync is True:
+            self.flush()
 
     def load(self):
         """Function load the file object and save contents in self.__data
@@ -109,3 +113,13 @@ class PickleCache(object):
             fhandler = open(self.__file_path, 'r')
             self.__data = pickle.load(fhandler)
             fhandler.close()
+
+    def flush(self):
+        """Function open the file as writable and dump to save the data
+            to file object.
+        Args:
+            None
+        """
+        fhandler = open(self.__file_path, 'w')
+        pickle.dump(self.__data, fhandler)
+        fhandler.close()
