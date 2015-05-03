@@ -25,6 +25,7 @@ class PickleCache(object):
         self.__file_path = file_path
         self.autosync = autosync
         self.__data = {}
+        self.load()
 
     def __setitem__(self, key, value):
         """Function takes two arguments and save in a dictionary.
@@ -97,3 +98,14 @@ class PickleCache(object):
                 0
         """
         del (self.__data)[key]
+
+    def load(self):
+        """Function load the file object and save contents in self.__data
+        Args:
+            None
+        """
+        if os.path.exists(self.__file_path)\
+           and os.path.getsize(self.__file_path) > 0:
+            fhandler = open(self.__file_path, 'r')
+            self.__data = pickle.load(fhandler)
+            fhandler.close()
